@@ -17,16 +17,13 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
-// Axes Helper
-const axesHelper = new THREE.AxesHelper();
-axesHelper.position.y = 0.25;
-scene.add(axesHelper);
-
 /**
  * Water
  */
 // Geometry
 const waterGeometry = new THREE.PlaneGeometry(2, 2, 512, 512);
+waterGeometry.deleteAttribute("normal");
+waterGeometry.deleteAttribute("uv");
 
 // Colors
 debugObject.depthColor = "#ff4000";
@@ -177,6 +174,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 /**
  * Animate
